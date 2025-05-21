@@ -1,0 +1,23 @@
+services:
+  fastcgi-app:
+    build: .
+    image: fcgi-nginx:alpine-2.0
+    networks:
+      - app-network
+    ports:
+      - "81"
+
+  nginx-proxy:
+    image: nginx:alpine
+    networks:
+      - app-network
+    ports:
+      - "80:8080"
+    volumes:
+      - ./nginx/proxy-nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - fastcgi-app
+
+networks:
+  app-network:
+    driver: bridge
