@@ -1,0 +1,10 @@
+services:
+  serv5:
+    container_name: serv_5
+    build: ./part_5/
+  serv6:
+    container_name: serv_6
+    build: ./part_6/
+    ports:
+      - "80:8080"
+
